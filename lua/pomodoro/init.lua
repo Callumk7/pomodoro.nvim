@@ -4,10 +4,19 @@ local M = {}
 -- Module version
 M.version = '0.1.0'
 
+-- Load submodules
+M.timer = require('pomodoro.timer')
+M.state = require('pomodoro.state')
+M.ui = require('pomodoro.ui')
+
 -- Initialize the plugin
 function M.setup(opts)
   opts = opts or {}
-  -- Setup code will go here
+  
+  -- Initialize all submodules
+  M.timer.setup()
+  M.state.setup()
+  M.ui.setup()
 end
 
 return M
