@@ -8,15 +8,15 @@ local buf_id = nil
 
 -- Window configuration
 local function get_win_config()
-    return {
-        relative = "editor",
-        width = 20,
-        height = 3,
-        row = 1,
-        col = math.floor(vim.o.columns - 22),
-        style = "minimal",
-        border = "rounded"
-    }
+	return {
+		relative = "editor",
+		width = 20,
+		height = 3,
+		row = 1,
+		col = math.floor(vim.o.columns - 22),
+		style = "minimal",
+		border = "rounded",
+	}
 end
 
 -- Initialize UI module
