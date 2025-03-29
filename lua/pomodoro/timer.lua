@@ -36,7 +36,33 @@ function M.start()
         -- Update UI
         require('pomodoro.ui').update()
       else
-        M.stop()
+        -- Session completed
+        if current.mode == state.STATES.WORK then
+          -- Work session completed
+          state.update_state({ completed_sessions = (current.completed_sessions or 0) + 1 })
+          
+          -- Determine break type
+          if current.completed_sessions % current.sessions_before_long_break == 0 then
+            -- Time for a long break
+            state.update_state({ 
+              mode = state.STATES.BREAK,
+              remaining_time = 900  -- 15 minutes
+            })
+          else
+            -- Short break
+            state.update_state({ 
+              mode = state.STATES.BREAK,
+              remaining_time = 300  -- 5 minutes
+            })
+          end
+        else
+          -- Break completed, start new work session
+          state.update_state({ 
+            mode = state.STATES.WORK,
+            remaining_time = 1500  -- 25 minutes
+          })
+        end
+        require('pomodoro.ui').update()
       end
     end)
   )

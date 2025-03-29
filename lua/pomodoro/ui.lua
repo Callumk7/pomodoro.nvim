@@ -94,6 +94,14 @@ function M.update()
 	vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, lines)
 	vim.api.nvim_set_option_value("modifiable", false, { buf = buf_id })
 
+	-- Update window title
+	local title = string.format("Pomodoro - %s %02d:%02d (%d/%d)", 
+		mode, minutes, seconds, 
+		current.completed_sessions % current.sessions_before_long_break + 1,
+		current.sessions_before_long_break)
+	vim.opt.titlestring = title
+	vim.opt.title = true
+
 	-- Show window if not visible
 	if not M.visible then
 		M.show()
