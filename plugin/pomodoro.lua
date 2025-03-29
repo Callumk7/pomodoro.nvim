@@ -12,6 +12,14 @@ vim.api.nvim_create_user_command('PomodoroStart', function()
   vim.pomodoro.start()
 end, {})
 
+vim.api.nvim_create_user_command('PomodoroPause', function()
+  vim.pomodoro.pause()
+end, {})
+
+vim.api.nvim_create_user_command('PomodoroResume', function()
+  vim.pomodoro.resume()
+end, {})
+
 vim.api.nvim_create_user_command('PomodoroStop', function()
   vim.pomodoro.stop()
 end, {})

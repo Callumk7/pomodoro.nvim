@@ -44,6 +44,25 @@ function M.start()
   )
 end
 
+-- Pause the timer
+function M.pause()
+  if not timer then return end
+  
+  timer:stop()
+  timer:close()
+  timer = nil
+  
+  state.update_state({ is_paused = true })
+end
+
+-- Resume the timer
+function M.resume()
+  if timer then return end
+  
+  state.update_state({ is_paused = false })
+  M.start()
+end
+
 -- Stop the timer
 function M.stop()
   if timer then

@@ -24,6 +24,16 @@ function M.start()
   M.timer.start()
 end
 
+-- Pause pomodoro timer
+function M.pause()
+  M.timer.pause()
+end
+
+-- Resume pomodoro timer
+function M.resume()
+  M.timer.resume()
+end
+
 -- Stop pomodoro timer
 function M.stop()
   M.timer.stop()
