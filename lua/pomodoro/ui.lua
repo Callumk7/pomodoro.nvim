@@ -25,8 +25,8 @@ function M.setup()
 		-- Create buffer for the timer window
 		buf_id = vim.api.nvim_create_buf(false, true)
 		if buf_id then
-			vim.api.nvim_buf_set_option(buf_id, "bufhidden", "hide")
-			vim.api.nvim_buf_set_option(buf_id, "modifiable", false)
+			vim.api.nvim_buf_set_option_value(buf_id, "bufhidden", "hide")
+			vim.api.nvim_buf_set_option_value(buf_id, "modifiable", false)
 		end
 	end
 end
@@ -84,9 +84,9 @@ function M.update()
 	}
 
 	-- Update buffer content
-	vim.api.nvim_buf_set_option(buf_id, "modifiable", true)
+	vim.api.nvim_buf_set_option_value(buf_id, "modifiable", true)
 	vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, lines)
-	vim.api.nvim_buf_set_option(buf_id, "modifiable", false)
+	vim.api.nvim_buf_set_option_value(buf_id, "modifiable", false)
 
 	-- Show window if not visible
 	if not M.visible then
