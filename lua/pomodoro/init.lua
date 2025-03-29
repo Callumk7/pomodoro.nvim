@@ -19,4 +19,14 @@ function M.setup(opts)
   M.ui.setup()
 end
 
+-- Start pomodoro timer
+function M.start()
+  M.timer.start()
+end
+
+-- Stop pomodoro timer
+function M.stop()
+  M.timer.stop()
+end
+
 return M
