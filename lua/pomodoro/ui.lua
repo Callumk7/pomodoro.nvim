@@ -21,10 +21,14 @@ end
 
 -- Initialize UI module
 function M.setup()
-	-- Create buffer for the timer window
-	buf_id = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_option_value(buf_id, "bufhidden", "hide")
-	vim.api.nvim_buf_set_option_value(buf_id, "modifiable", false)
+	if not buf_id or not vim.api.nvim_buf_is_valid(buf_id) then
+		-- Create buffer for the timer window
+		buf_id = vim.api.nvim_create_buf(false, true)
+		if buf_id then
+			vim.api.nvim_buf_set_option_value(buf_id, "bufhidden", "hide")
+			vim.api.nvim_buf_set_option_value(buf_id, "modifiable", false)
+		end
+	end
 end
 
 -- Show the timer window
@@ -33,9 +37,16 @@ function M.show()
 		return
 	end
 
-	win_id = vim.api.nvim_open_win(buf_id, false, get_win_config())
-	vim.api.nvim_win_set_option_value(win_id, "winblend", 15)
-	M.visible = true
+	-- Ensure we have a valid buffer
+	if not buf_id or not vim.api.nvim_buf_is_valid(buf_id) then
+		M.setup()
+	end
+
+	if buf_id then
+		win_id = vim.api.nvim_open_win(buf_id, false, get_win_config())
+		vim.api.nvim_win_set_option_value(win_id, "winblend", 15)
+		M.visible = true
+	end
 end
 
 -- Hide the timer window
@@ -49,6 +60,11 @@ end
 
 -- Update the timer display
 function M.update()
+	-- Ensure we have a valid buffer
+	if not buf_id or not vim.api.nvim_buf_is_valid(buf_id) then
+		M.setup()
+	end
+
 	if not buf_id then
 		return
 	end
