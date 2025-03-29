@@ -26,6 +26,10 @@ function M.start()
   timer:start(0, 1000, vim.schedule_wrap(function()
     if M.remaining > 0 then
       M.remaining = M.remaining - 1
+      -- Print remaining time
+      local minutes = math.floor(M.remaining / 60)
+      local seconds = M.remaining % 60
+      print(string.format("Pomodoro: %02d:%02d remaining", minutes, seconds))
     else
       M.stop()
     end
