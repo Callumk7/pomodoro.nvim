@@ -28,8 +28,8 @@ function M.setup()
 
 	-- Only set options if we have a valid buffer
 	if buf_id and vim.api.nvim_buf_is_valid(buf_id) then
-		vim.api.nvim_buf_set_option_value(buf_id, "bufhidden", "hide")
-		vim.api.nvim_buf_set_option_value(buf_id, "modifiable", false)
+		vim.api.nvim_set_option_value("bufhidden", "hide", { buf = buf_id })
+		vim.api.nvim_set_option_value("modifiable", false, { buf = buf_id })
 	else
 		vim.notify("Failed to create pomodoro buffer", vim.log.levels.ERROR)
 	end
@@ -48,7 +48,7 @@ function M.show()
 
 	if buf_id then
 		win_id = vim.api.nvim_open_win(buf_id, false, get_win_config())
-		vim.api.nvim_win_set_option_value(win_id, "winblend", 15)
+		vim.api.nvim_set_option_value("winblend", 15, { win = win_id })
 		M.visible = true
 	end
 end
@@ -90,9 +90,9 @@ function M.update()
 	}
 
 	-- Update buffer content
-	vim.api.nvim_buf_set_option_value(buf_id, "modifiable", true)
+	vim.api.nvim_set_option_value("modifiable", true, { buf = buf_id })
 	vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, lines)
-	vim.api.nvim_buf_set_option_value(buf_id, "modifiable", false)
+	vim.api.nvim_set_option_value("modifiable", false, { buf = buf_id })
 
 	-- Show window if not visible
 	if not M.visible then
