@@ -33,10 +33,8 @@ function M.start()
       local current = state.get_state()
       if current.remaining_time > 0 then
         state.update_state({ remaining_time = current.remaining_time - 1 })
-        -- Print remaining time
-        local minutes = math.floor(current.remaining_time / 60)
-        local seconds = current.remaining_time % 60
-        print(string.format("Pomodoro: %02d:%02d remaining", minutes, seconds))
+        -- Update UI
+        require('pomodoro.ui').update()
       else
         M.stop()
       end
@@ -72,6 +70,7 @@ function M.stop()
   end
 
   state.reset()
+  require('pomodoro.ui').hide()
 end
 
 return M
