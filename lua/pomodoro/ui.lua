@@ -7,15 +7,17 @@ local win_id = nil
 local buf_id = nil
 
 -- Window configuration
-local win_config = {
-	relative = "editor",
-	width = 20,
-	height = 3,
-	row = 1,
-	col = vim.o.columns - 22,
-	style = "minimal",
-	border = "rounded",
-}
+local function get_win_config()
+    return {
+        relative = "editor",
+        width = 20,
+        height = 3,
+        row = 1,
+        col = math.floor(vim.o.columns - 22),
+        style = "minimal",
+        border = "rounded"
+    }
+end
 
 -- Initialize UI module
 function M.setup()
@@ -31,7 +33,7 @@ function M.show()
 		return
 	end
 
-	win_id = vim.api.nvim_open_win(buf_id, false, win_config)
+	win_id = vim.api.nvim_open_win(buf_id, false, get_win_config())
 	vim.api.nvim_win_set_option_value(win_id, "winblend", 15)
 	M.visible = true
 end
