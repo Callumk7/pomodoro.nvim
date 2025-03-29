@@ -16,7 +16,7 @@ local state = {
 	is_running = false,
 	is_paused = false,
 	completed_sessions = 0,
-	sessions_before_long_break = 4
+	sessions_before_long_break = 4,
 }
 
 -- Get current state (returns a copy to prevent direct mutation)

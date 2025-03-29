@@ -1,6 +1,6 @@
 # 🍅 Pomodoro.nvim
 
-A simple Pomodoro timer plugin for Neovim, created with the help of AI pair programming tools.
+A simple Pomodoro timer plugin for Neovim, created with the help of AI pair programming tools. (Aider, Claude 3.5)
 
 ## Features
 
@@ -17,7 +17,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-    "kloovin/pomodoro.nvim",
+    "callumk7/pomodoro.nvim",
     config = function()
         require("pomodoro").setup()
     end

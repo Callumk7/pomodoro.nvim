@@ -2,41 +2,41 @@
 local M = {}
 
 -- Module version
-M.version = '0.1.0'
+M.version = "0.1.0"
 
 -- Load submodules
-M.timer = require('pomodoro.timer')
-M.state = require('pomodoro.state')
-M.ui = require('pomodoro.ui')
+M.timer = require("pomodoro.timer")
+M.state = require("pomodoro.state")
+M.ui = require("pomodoro.ui")
 
 -- Initialize the plugin
 function M.setup(opts)
-  opts = opts or {}
-  
-  -- Initialize all submodules
-  M.timer.setup()
-  M.state.setup()
-  M.ui.setup()
+	opts = opts or {}
+
+	-- Initialize all submodules
+	M.timer.setup()
+	M.state.setup()
+	M.ui.setup()
 end
 
 -- Start pomodoro timer
 function M.start()
-  M.timer.start()
+	M.timer.start()
 end
 
 -- Pause pomodoro timer
 function M.pause()
-  M.timer.pause()
+	M.timer.pause()
 end
 
 -- Resume pomodoro timer
 function M.resume()
-  M.timer.resume()
+	M.timer.resume()
 end
 
 -- Stop pomodoro timer
 function M.stop()
-  M.timer.stop()
+	M.timer.stop()
 end
 
 return M
