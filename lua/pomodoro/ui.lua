@@ -50,6 +50,8 @@ function M.show()
 	if buf_id then
 		win_id = vim.api.nvim_open_win(buf_id, false, get_win_config())
 		vim.api.nvim_set_option_value("winblend", 15, { win = win_id })
+		-- Set window background to match Normal highlight group
+		vim.api.nvim_win_set_option(win_id, "winhighlight", "Normal:Normal")
 		M.visible = true
 	end
 end
