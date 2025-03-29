@@ -16,7 +16,6 @@ local function get_win_config()
 		col = math.floor(vim.o.columns - 22),
 		style = "minimal",
 		border = "rounded",
-		background = "Normal",
 	}
 end
 
