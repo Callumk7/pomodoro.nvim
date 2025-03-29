@@ -21,13 +21,17 @@ end
 
 -- Initialize UI module
 function M.setup()
+	-- Create buffer for the timer window if it doesn't exist or isn't valid
 	if not buf_id or not vim.api.nvim_buf_is_valid(buf_id) then
-		-- Create buffer for the timer window
 		buf_id = vim.api.nvim_create_buf(false, true)
-		if buf_id then
-			vim.api.nvim_buf_set_option(buf_id, "bufhidden", "hide")
-			vim.api.nvim_buf_set_option(buf_id, "modifiable", false)
-		end
+	end
+
+	-- Only set options if we have a valid buffer
+	if buf_id and vim.api.nvim_buf_is_valid(buf_id) then
+		vim.api.nvim_buf_set_option_value(buf_id, "bufhidden", "hide")
+		vim.api.nvim_buf_set_option_value(buf_id, "modifiable", false)
+	else
+		vim.notify("Failed to create pomodoro buffer", vim.log.levels.ERROR)
 	end
 end
 
@@ -65,7 +69,9 @@ function M.update()
 		M.setup()
 	end
 
-	if not buf_id then
+	-- Double check we have a valid buffer after setup
+	if not buf_id or not vim.api.nvim_buf_is_valid(buf_id) then
+		vim.notify("Cannot update pomodoro display: invalid buffer", vim.log.levels.ERROR)
 		return
 	end
 
@@ -84,9 +90,9 @@ function M.update()
 	}
 
 	-- Update buffer content
-	vim.api.nvim_buf_set_option(buf_id, "modifiable", true)
+	vim.api.nvim_buf_set_option_value(buf_id, "modifiable", true)
 	vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, lines)
-	vim.api.nvim_buf_set_option(buf_id, "modifiable", false)
+	vim.api.nvim_buf_set_option_value(buf_id, "modifiable", false)
 
 	-- Show window if not visible
 	if not M.visible then
